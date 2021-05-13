@@ -57,7 +57,9 @@ public class HomeFragment extends Fragment {
                                 @Override
                                 public void onResponse(Call<WeatherModel> call, Response<WeatherModel> response) {
                                     if (response.isSuccessful()){
-                                        addBinding.textMessage.setText(response.body().data.current_condition.get(0).temp_C + "");
+                                        addBinding.temperature.setText("Temperature is: "+response.body().data.current_condition.get(0).temp_C + "°C");
+                                        addBinding.humidity.setText("Humidity is:"+response.body().data.current_condition.get(0).humidity+"%");
+                                        addBinding.pressure.setText("Pressure is:"+(double)response.body().data.current_condition.get(0).pressure/10+"kilopascals");
                                     }
 
                                 }

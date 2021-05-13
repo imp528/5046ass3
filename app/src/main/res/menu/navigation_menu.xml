@@ -15,6 +15,10 @@
         android:icon="@drawable/ic_baseline_mood_24"
         android:title="Daily Record" />
     <item
+        android:id="@+id/nav_report_fragment"
+        android:icon="@drawable/ic_baseline_brush_24"
+        android:title="Report" />
+    <item
         android:id="@+id/nav_map"
         android:icon="@drawable/ic_baseline_map_24"
         android:title="Map" />
