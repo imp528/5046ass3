@@ -9,4 +9,5 @@
     <string name="invalid_username">Not a valid username</string>
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">"Login failed"</string>
+    <string name="mapbox_access_token">pk.eyJ1IjoieWltZW5nd3UiLCJhIjoiY2tvbjR4ZjIxMGJ1OTJ3cDNjZm1veWZjbCJ9.HQsKv-a_fNufQ7wLA73Q2g</string>
 </resources>

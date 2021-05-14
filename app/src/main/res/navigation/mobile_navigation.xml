@@ -20,9 +20,8 @@
         android:id="@+id/nav_report_fragment"
         android:name="com.example.myapplication.fragment.ReportFragment"
         android:label="ReportFragment" />
-    <fragment
+    <activity
         android:id="@+id/nav_map"
-        android:name="com.example.myapplication.fragment.Map"
-        android:label="Map"
-        tools:layout="@layout/map" />
+        android:name="com.example.myapplication.Map.MapActivity"
+        android:label="Map" />
 </navigation>
