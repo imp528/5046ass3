@@ -3,13 +3,16 @@
     android:id="@+id/activity_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/wrap"
     android:orientation="vertical">
+
     <TextView
         android:id="@+id/textView3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="20dp"
-        android:text="Please enter a pain level\n" />
+        android:text="Please enter a pain level\n"
+        android:textSize="15dp" />
+
     <SeekBar
         android:id="@+id/seekBar"
         android:layout_width="match_parent"
@@ -17,38 +20,76 @@
         android:max="10"
         android:min="0"
         android:progress="1" />
+
     <TextView
         android:id="@+id/textView4"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="20dp"
-        android:text="Please select a pain location\n" />
+        android:text="Please select a pain location\n"
+        android:textSize="15dp" />
+
     <Spinner
         android:id="@+id/spinner"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:padding="10dp"
         android:entries="@array/locations"
+        android:padding="10dp"
         android:spinnerMode="dropdown" />
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="What's your mood now?\n"
+        android:textSize="15dp" />
+
+    <Spinner
+        android:id="@+id/spinner2"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:entries="@array/mood"
+        android:padding="10dp"
+        android:spinnerMode="dropdown" />
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Set today's goal~\n"
+        android:textSize="15dp" />
 
     <EditText
         android:id="@+id/editText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Enter a message"
-        />
-    <Button
-        android:id="@+id/addButton"
+        android:text="10000" />
+
+    <TextView
+        android:id="@+id/textView7"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Add"
-        />
-    <Button
-        android:id="@+id/clearButton"
+        android:text="Please enter the total number of your physical steps~\n"
+        android:textSize="15dp" />
+
+    <EditText
+        android:id="@+id/editText1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Clear" />
+        android:text="10000" />
+
+    <Button
+        android:id="@+id/saveBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Save" />
+
+    <Button
+        android:id="@+id/editBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Edit" />
 
 
 </LinearLayout>

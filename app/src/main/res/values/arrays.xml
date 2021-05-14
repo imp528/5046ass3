@@ -13,4 +13,11 @@
         <item>jaw</item>
         <item>facial</item>
     </string-array>
+    <string-array name="mood">
+        <item>very good</item>
+        <item>good</item>
+        <item>average</item>
+        <item>low</item>
+        <item>very low</item>
+    </string-array>
 </resources>
