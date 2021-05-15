@@ -21,6 +21,8 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.myapplication.Alarm;
 import com.example.myapplication.RegisterActivity;
+import com.example.myapplication.dao.RecordDao;
+import com.example.myapplication.database.PainRecord;
 import com.example.myapplication.databinding.AddFragmentBinding;
 import com.example.myapplication.viewmodel.SharedViewModel;
 
@@ -36,6 +38,8 @@ public class AddFragment extends Fragment {
         View view = addBinding.getRoot();
         SharedViewModel model = new
                 ViewModelProvider(getActivity()).get(SharedViewModel.class);
+
+
         addBinding.saveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

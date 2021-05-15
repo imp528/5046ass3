@@ -11,10 +11,13 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.example.myapplication.databinding.ActivityMainBinding;
+import com.example.myapplication.databinding.AddFragmentBinding;
+import com.example.myapplication.viewmodel.RecordViewModel;
 
 public class MainActivity extends AppCompatActivity {
     private ActivityMainBinding binding;
     private AppBarConfiguration mAppBarConfiguration;
+    private RecordViewModel recordViewModel;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,5 +41,7 @@ public class MainActivity extends AppCompatActivity {
 //Sets up a Toolbar for use with a NavController.
         NavigationUI.setupWithNavController(binding.appBar.toolbar,navController,
                 mAppBarConfiguration);
+
+
     }
 }

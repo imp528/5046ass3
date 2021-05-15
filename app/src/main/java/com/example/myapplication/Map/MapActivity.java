@@ -9,6 +9,8 @@ import android.location.Geocoder;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.myapplication.R;
 import com.mapbox.mapboxsdk.Mapbox;
@@ -27,6 +29,7 @@ import com.mapbox.mapboxsdk.plugins.markerview.MarkerViewManager;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 public class MapActivity extends AppCompatActivity {
 
@@ -39,17 +42,35 @@ public class MapActivity extends AppCompatActivity {
         String token = getString(R.string.mapbox_access_token);
         Mapbox.getInstance(this, token);
         setContentView(R.layout.activity_map); //lat and long are hardcoded here but could be provided at run time
-
+        mapView = (MapView) findViewById(R.id.mapView);
+        mapView.onCreate(savedInstanceState);
         searchBtn = findViewById(R.id.search);
         searchBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final LatLng latLng = getLocationFromAddress(getApplicationContext(), findViewById(R.id.address).toString());
+                final LatLng latLng1 = getLocationFromAddress(MapActivity.this, ((EditText)findViewById(R.id.address)).getText().toString());
+                if (latLng1 != null){
+                    mapView.getMapAsync(new OnMapReadyCallback() {
+                        @Override
+                        public void onMapReady(@NonNull final MapboxMap mapboxMap) {
+
+                            mapboxMap.setStyle(Style.MAPBOX_STREETS, style -> {
+                                CameraPosition position = new CameraPosition.Builder().target(latLng1).zoom(13).build();
+                                mapboxMap.setCameraPosition(position);
+                                MarkerOptions markerOptions = new MarkerOptions();
+                                markerOptions.position(latLng1);
+                                markerOptions.title("Here");
+                                mapboxMap.addMarker(markerOptions);
+                            });
+
+                        }
+                    });
             }
-        });
+                else {
+                    Toast.makeText(MapActivity.this, "invalid address", Toast.LENGTH_LONG).show();
+                }
+        }});
         final LatLng latLng = new LatLng(-37.876823, 145.140213);
-        mapView = (MapView) findViewById(R.id.mapView);
-        mapView.onCreate(savedInstanceState);
         mapView.getMapAsync(new OnMapReadyCallback() {
             @Override
             public void onMapReady(@NonNull final MapboxMap mapboxMap) {
@@ -68,7 +89,7 @@ public class MapActivity extends AppCompatActivity {
             }
         });
     }
-
+// Use geocoder to convert the input address to location
     public LatLng getLocationFromAddress(Context context, String strAddress) {
 
         Geocoder coder = new Geocoder(context);
@@ -77,8 +98,8 @@ public class MapActivity extends AppCompatActivity {
 
         try {
             // May throw an IOException
-            address = coder.getFromLocationName(strAddress, 5);
-            if (address == null) {
+            address = coder.getFromLocationName(strAddress, 1);
+            if (address.size() == 0) {
                 return null;
             }
 

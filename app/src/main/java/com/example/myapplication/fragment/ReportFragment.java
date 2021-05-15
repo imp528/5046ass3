@@ -8,7 +8,6 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
-import com.example.myapplication.databinding.MapBinding;
 import com.example.myapplication.databinding.ReportFragmentBinding;
 import com.example.myapplication.viewmodel.SharedViewModel;
 

@@ -50,32 +50,33 @@ public class HomeFragment extends Fragment {
         fusedLocationProviderClient.getLastLocation()
                 .addOnSuccessListener(requireActivity(), loc ->
                 {
-                    getActivity().runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            location = loc.getLatitude()+","+loc.getLongitude();
-                            Call<WeatherModel> callAsync = weatherApi.getWeather(location, "today", "json", "5043e688390b4cc0a8683136211305");
-                            callAsync.enqueue(new Callback<WeatherModel>(){
+                    getActivity().runOnUiThread(() -> {
+                        location = loc.getLatitude()+","+loc.getLongitude();
+                        Call<WeatherModel> callAsync = weatherApi.getWeather(location, "today", "json", "5043e688390b4cc0a8683136211305");
+                        callAsync.enqueue(new Callback<WeatherModel>(){
 
-                                @Override
-                                public void onResponse(Call<WeatherModel> call, Response<WeatherModel> response) {
-                                    if (response.isSuccessful()){
-                                        Calendar c = Calendar.getInstance();
-                                        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd.MM.yyyy");
-                                        addBinding.date.setText("The date of today is:" + simpleDateFormat.format(c.getTime()));
-                                        addBinding.temperature.setText("Temperature is: "+response.body().data.current_condition.get(0).temp_C + "°C");
-                                        addBinding.humidity.setText("Humidity is:"+response.body().data.current_condition.get(0).humidity+"%");
-                                        addBinding.pressure.setText("Pressure is:"+(double)response.body().data.current_condition.get(0).pressure/10+"kilopascals");
-                                    }
-
+                            @Override
+                            public void onResponse(Call<WeatherModel> call, Response<WeatherModel> response) {
+                                if (response.isSuccessful()){
+                                    getActivity().runOnUiThread(() -> {
+                                        if (isAdded()) {
+                                            Calendar c = Calendar.getInstance();
+                                            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd.MM.yyyy");
+                                            addBinding.date.setText("The date of today is:" + simpleDateFormat.format(c.getTime()));
+                                            addBinding.temperature.setText("Temperature is: " + response.body().data.current_condition.get(0).temp_C + "°C");
+                                            addBinding.humidity.setText("Humidity is:" + response.body().data.current_condition.get(0).humidity + "%");
+                                            addBinding.pressure.setText("Pressure is:" + (double) response.body().data.current_condition.get(0).pressure / 10 + "kilopascals");
+                                        }
+                                    });
                                 }
 
-                                @Override
-                                public void onFailure(Call<WeatherModel> call, Throwable t) {
+                            }
 
-                                }
-                            });
-                        }
+                            @Override
+                            public void onFailure(Call<WeatherModel> call, Throwable t) {
+
+                            }
+                        });
                     });
 
                 });
