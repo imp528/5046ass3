@@ -1,19 +1,30 @@
 package com.example.myapplication.fragment;
 
+import android.app.AlarmManager;
+import android.app.DatePickerDialog;
+import android.app.PendingIntent;
+import android.app.TimePickerDialog;
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.DatePicker;
 import android.widget.SeekBar;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.example.myapplication.Alarm;
 import com.example.myapplication.RegisterActivity;
 import com.example.myapplication.databinding.AddFragmentBinding;
 import com.example.myapplication.viewmodel.SharedViewModel;
+
+import java.util.Calendar;
 
 public class AddFragment extends Fragment {
     private AddFragmentBinding addBinding;
@@ -99,8 +110,37 @@ public class AddFragment extends Fragment {
 
             }
         });
+
+        // The button to set alarm, using time picker
+        addBinding.setAlarmBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Calendar calendar = Calendar.getInstance();
+                int hourOfDay  = calendar.get(Calendar.HOUR_OF_DAY);
+                int minute  = calendar.get(Calendar.MINUTE);
+                new TimePickerDialog(getContext(), new TimePickerDialog.OnTimeSetListener() {
+
+                    @Override
+                    public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                        addBinding.textView8.setText("The alarm you set is: "+hourOfDay+":"+minute);
+                        setAlarm(calendar.getTimeInMillis());
+                    }
+                }, hourOfDay, minute, true).show();
+            }
+        });
         return view;
     }
+
+    //Using alarm manager to set alarm
+    private void setAlarm(long timeInMillis) {
+        AlarmManager alarmManager =
+                (AlarmManager) getContext().getSystemService(Context.ALARM_SERVICE);
+        Intent intent = new Intent(getActivity(), Alarm.class);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(getContext(), 0, intent,0);
+        alarmManager.setRepeating(AlarmManager.RTC,timeInMillis,AlarmManager.INTERVAL_DAY,pendingIntent);
+        Toast.makeText(getContext(), "Alarm is set.", Toast.LENGTH_SHORT).show();
+    }
+
     @Override
     public void onDestroyView() {
         super.onDestroyView();

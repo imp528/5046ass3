@@ -91,5 +91,18 @@
         android:layout_height="wrap_content"
         android:text="Edit" />
 
+    <Button
+        android:id="@+id/setAlarmBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Set Alarm" />
+
+    <TextView
+        android:id="@+id/textView8"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:textSize="15dp" />
+
 
 </LinearLayout>
