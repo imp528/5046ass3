@@ -34,7 +34,7 @@ public class AddFragment extends Fragment {
                     return;
                 }
                 if (addBinding.editText1.getText().toString().matches("[0-9]*")){
-                    if (Integer.parseInt(addBinding.editText1.getText().toString())>=10000) {
+                    if (Integer.parseInt(addBinding.editText1.getText().toString())>10000) {
                         addBinding.editText1.setError("You can only enter numbers[0-10000]!");
                         return;
                     }
@@ -48,7 +48,7 @@ public class AddFragment extends Fragment {
                     return;
                 }
                 if (addBinding.editText.getText().toString().matches("[0-9]*")){
-                    if (Integer.parseInt(addBinding.editText.getText().toString())>=10000) {
+                    if (Integer.parseInt(addBinding.editText.getText().toString())>10000) {
                         addBinding.editText.setError("You can only enter numbers[0-10000]!");
                         return;
                     }

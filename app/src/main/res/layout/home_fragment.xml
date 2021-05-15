@@ -15,6 +15,13 @@
         android:text="Welcome to Personalised Mobile Pain Dairy"
         android:textSize="30sp" />
     <TextView
+        android:id="@+id/date"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:text=""
+        android:textSize="20sp" />
+    <TextView
         android:id="@+id/temperature"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

@@ -18,6 +18,9 @@ import com.example.myapplication.viewmodel.SharedViewModel;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -57,6 +60,9 @@ public class HomeFragment extends Fragment {
                                 @Override
                                 public void onResponse(Call<WeatherModel> call, Response<WeatherModel> response) {
                                     if (response.isSuccessful()){
+                                        Calendar c = Calendar.getInstance();
+                                        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd.MM.yyyy");
+                                        addBinding.date.setText("The date of today is:" + simpleDateFormat.format(c.getTime()));
                                         addBinding.temperature.setText("Temperature is: "+response.body().data.current_condition.get(0).temp_C + "°C");
                                         addBinding.humidity.setText("Humidity is:"+response.body().data.current_condition.get(0).humidity+"%");
                                         addBinding.pressure.setText("Pressure is:"+(double)response.body().data.current_condition.get(0).pressure/10+"kilopascals");
