@@ -28,6 +28,16 @@ public class RecordRepository {
         return allRecords;
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
+    public CompletableFuture<List<Record>> findAllList(){
+        return CompletableFuture.supplyAsync(new Supplier<List<Record>>() {
+            @Override
+            public List<Record> get() {
+                return recordDao.getAllList();
+            }
+        }, PainRecord.databaseWriteExecutor);
+    }
+
     public void insert(final Record record){
         PainRecord.databaseWriteExecutor.execute(new Runnable() {
             @Override
@@ -54,4 +64,24 @@ public class RecordRepository {
             }
         });
     }
+
+    public void deleteAll(){
+        PainRecord.databaseWriteExecutor.execute(new Runnable() {
+            @Override
+            public void run() {
+                recordDao.deleteAll();
+            }
+        });
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.N)
+    public CompletableFuture<Record> findByDate(final String date){
+        return CompletableFuture.supplyAsync(new Supplier<Record>() {
+            @Override
+            public Record get() {
+                return recordDao.findDate(date);
+            }
+        }, PainRecord.databaseWriteExecutor);
+    }
 }
+

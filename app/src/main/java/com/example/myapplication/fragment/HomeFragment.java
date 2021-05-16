@@ -1,6 +1,8 @@
 package com.example.myapplication.fragment;
 
 import android.Manifest;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -66,6 +68,12 @@ public class HomeFragment extends Fragment {
                                             addBinding.temperature.setText("Temperature is: " + response.body().data.current_condition.get(0).temp_C + "°C");
                                             addBinding.humidity.setText("Humidity is:" + response.body().data.current_condition.get(0).humidity + "%");
                                             addBinding.pressure.setText("Pressure is:" + (double) response.body().data.current_condition.get(0).pressure / 10 + "kilopascals");
+                                            SharedPreferences sharedPreferences = requireActivity().getSharedPreferences("WEATHER", Context.MODE_PRIVATE);
+                                            SharedPreferences.Editor weatherEditor = sharedPreferences.edit();
+                                            weatherEditor.putInt("temperature", response.body().data.current_condition.get(0).temp_C);
+                                            weatherEditor.putInt("humidity", response.body().data.current_condition.get(0).humidity);
+                                            weatherEditor.putInt("pressure", response.body().data.current_condition.get(0).pressure);
+                                            weatherEditor.apply();
                                         }
                                     });
                                 }
