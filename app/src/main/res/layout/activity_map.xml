@@ -12,11 +12,19 @@
         android:ems="10"
         android:hint="Please enter address" />
 
+
     <Button
         android:id="@+id/search"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Search" />
+
+    <Button
+        android:id="@+id/back"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Back to home" />
+
 
     <com.mapbox.mapboxsdk.maps.MapView
         android:id="@+id/mapView"

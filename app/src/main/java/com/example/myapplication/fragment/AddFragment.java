@@ -48,6 +48,7 @@ public class AddFragment extends Fragment {
         SharedViewModel model = new
                 ViewModelProvider(getActivity()).get(SharedViewModel.class);
 
+        //if today have already recorded, disable the element.
         recordViewModel = new ViewModelProvider(getActivity()).get(RecordViewModel.class);
         Calendar c = Calendar.getInstance();
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd.MM.yyyy");
@@ -57,13 +58,11 @@ public class AddFragment extends Fragment {
             //if date equals one one the record, that means we have to update it
             for (Record r: l){
                 if (r.date.equals(date)){
-                    //we update the data based on primary key rid
                     addBinding.saveBtn.setEnabled(false);
                     addBinding.seekBar.setEnabled(false);
                     addBinding.editText.setEnabled(false);
                     addBinding.spinner.setEnabled(false);
                     addBinding.spinner2.setEnabled(false);
-                    addBinding.editText.setEnabled(false);
                     addBinding.editText1.setEnabled(false);
                     break;
                 }
@@ -130,6 +129,12 @@ public class AddFragment extends Fragment {
                 SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd.MM.yyyy");
                 String date = simpleDateFormat.format(c.getTime());
                 String email = FirebaseAuth.getInstance().getCurrentUser().getEmail();
+                //save the goal to shared preferences
+                SharedPreferences sp = requireActivity().getSharedPreferences("STEP", Context.MODE_PRIVATE);
+                SharedPreferences.Editor stepEditor = sp.edit();
+                stepEditor.putInt("goal", Integer.parseInt(addBinding.editText.getText().toString()));
+                stepEditor.putInt("step_today", Integer.parseInt(addBinding.editText1.getText().toString()));
+                stepEditor.apply();
                 // get a new record
                 Record record = new Record(painIntensityLevel,painLocation,mood,steps,date,temperature,humidity,pressure, email);
                 CompletableFuture<List<Record>> list = recordViewModel.getAllList();

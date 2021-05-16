@@ -48,6 +48,7 @@ public class Record {
     @NonNull
     public String email;
 
+
     public Record(int painIntensityLevel, @NonNull String painLocation, @NonNull String mood, int steps, @NonNull String date, float temperature, int humidity, int pressure, @NonNull String email) {
         this.painIntensityLevel = painIntensityLevel;
         this.painLocation = painLocation;

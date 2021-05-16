@@ -38,12 +38,6 @@ public class ReportFragment extends Fragment {
             @Override
             public void onChanged(List<Record> records) {
                 RecyclerView recyclerView = addBinding.recyclerView;
-//                String allRecords = "";
-//                for (Record temp: records){
-//                    String recordDetails = (temp.rid+"Date: "+temp.date+"    Pain Location: "+temp.painLocation+"    Pain Intensity Level: "+temp.painIntensityLevel+"    Steps taken: "+temp.steps
-//                    + "    Temperature: " + temp.temperature + "°C  Humidity: "+ temp.humidity + "% Pressure: "+ (double)temp.pressure/10 + "kp");
-//                    allRecords = allRecords + System.getProperty("line.separator") + recordDetails;
-//                }
                 recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
                 RecyclerView.Adapter adapter = new RecordAdaptor(records);
                 recyclerView.setAdapter(adapter);

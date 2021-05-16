@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myapplication.R;
 import com.example.myapplication.entity.Record;
+import com.google.firebase.auth.FirebaseAuth;
 
 import org.w3c.dom.Text;
 
@@ -30,14 +31,16 @@ class RecordAdaptor extends RecyclerView.Adapter<RecordAdaptor.ViewHolder>{
     }
     @Override
     public void onBindViewHolder(@NonNull RecordAdaptor.ViewHolder holder, int position) {
-        holder.date.setText("date: " + recordList.get(position).date);
-        holder.pressure.setText("pressure:" + (double)recordList.get(position).pressure/10+"kp");
-        holder.humidity.setText("humidity:"+recordList.get(position).humidity+"%");
-        holder.temperature.setText("temperature:"+recordList.get(position).temperature+"°C");
-        holder.painIntensityLevel.setText("pain intensity level:"+recordList.get(position).painIntensityLevel);
-        holder.steps.setText("steps"+recordList.get(position).steps);
-        holder.painLocation.setText("pain location:"+recordList.get(position).painLocation);
-        holder.mood.setText("mood:"+recordList.get(position).mood);
+        if (FirebaseAuth.getInstance().getCurrentUser().getEmail().equals(recordList.get(position).email)){
+            holder.date.setText("date: " + recordList.get(position).date);
+            holder.pressure.setText("pressure:" + (double)recordList.get(position).pressure/10+"kp");
+            holder.humidity.setText("humidity:"+recordList.get(position).humidity+"%");
+            holder.temperature.setText("temperature:"+recordList.get(position).temperature+"°C");
+            holder.painIntensityLevel.setText("pain intensity level:"+recordList.get(position).painIntensityLevel);
+            holder.steps.setText("steps"+recordList.get(position).steps);
+            holder.painLocation.setText("pain location:"+recordList.get(position).painLocation);
+            holder.mood.setText("mood:"+recordList.get(position).mood);
+        }
     }
 
     @Override
